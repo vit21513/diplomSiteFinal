@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h1>Admin Panel</h1>
+
+   <p><a href="{{ url_for('download_log') }}" class="btn btn-primary">Download email_errors.log</a></p>
+    <p><a href="{{ url_for('download_orders') }}" class="btn btn-primary">Download orders.json</a></p>
+
+     <p><a href="{{ url_for('delete_log') }}" class="btn btn-primary">Delete email_errors.log</a></p>
+    <p><a href="{{ url_for('delete_orders') }}" class="btn btn-primary">Delete orders.json</a></p>
+
+
+
+
+</body>
+</html>

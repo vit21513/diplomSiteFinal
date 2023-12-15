@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма заказа</title>
+    <!-- Подключаем Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main_text {
+            font-size: 16pt;
+            font-weight: bold;
+            font-style: italic;}
+    </style>
+{% extends 'index.html' %}
+
+</head>
+
+
+{% block head%}
+
+<body style="background-image: url('/static/fon.jpg'); background-size: cover;">
+
+
+    <div class="main_text">
+        <p class="text-center">На этой странице Вы можете подать заявку на любой вид работ, либо оставить обращение в
+            наш
+            адрес</p>
+    </div>
+    <p class="text-center"> * Для этого из выпадающего списка выберите интересующий обьект, введите контактные данные, в
+        поле сообщение в свободной форме опишите, необходимые Вам работы </p>
+
+
+    <form class="container mt-5" method="POST" action="/order/">
+        {{ form.csrf_token }}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        </div>
+        </div>
+        <div class="mb-1">
+            <label for="selectedOption" class="form-label">Выберите интересующий элемент из списка</label>
+            {{ form.selected_option(class="form-select", id="selectedOption", required="required") }}
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="lastName" class="form-label">Фамилия Имя</label>
+                {{ form.last_name(class="form-control", id="lastName", required="required") }}
+            </div>
+
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email адрес</label>
+                {{ form.email(class="form-control", id="email", required="required",
+                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", title="Введите действительный адрес
+                электронной
+                почты.") }}
+            </div>
+
+            <div class="col-md-2">
+                <label for="phone" class="form-label">Номер телефона</label>
+                {{ form.phone(class="form-control", id="phone", required="required", title="Введите контактный номер
+                телефона.") }}
+            </div>
+
+            <div class="mb-1">
+                <label for="message" class="form-label">Сообщение</label>
+                <textarea {{ form.message(class="form-control" , id="message" , required="required" , rows="4" )
+                    }}></textarea>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-2">
+                    <label for="captcha" class="form-label">{{ form.captcha.label }}</label>
+                    {{ form.captcha(class="form-control", id="captcha", required="required") }}
+                </div>
+                <img src="{{ url_for('static', filename='captcha.png') }}" alt="Captcha" style="max-width: 200px;">
+
+
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+
+
+
+    {% endblock %}
+</body>
+
+</html>

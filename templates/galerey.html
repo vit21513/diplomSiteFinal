@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Выполненые работы </title>
+    <style>
+    .custom-card img {
+      width: 40rem;
+      height: fit-content;
+    }
+    </style>
+</head>
+<body>
+{% extends 'index.html' %}
+{% block head%}
+<div class="container mt-4">
+    <div class="text-center" ; style="font-size: 18pt;font-family: 'Times New Roman', Times, serif;font-style: italic;">
+        Значимые объекты на которые нашими специалистами была подготовлена кадастровая и техническая документация
+    </div>
+    <div class="row justify-content-center">
+        {% for item in gal_content %}
+        <div class="col-md-6 col-sm-12 mb-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename=item.url) }}" alt="Изображение"
+                     class="card-img-top img-fluid">
+                <div class="card-body">
+                    <p class="card-text">{{item.title}}.</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

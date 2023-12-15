@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Техническая инвентаризация </title>
+    <!-- Подключаем Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main_text {
+            font-size: 16pt;
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+
+
+</head>
+{% extends 'index.html' %}
+
+
+
+
+{% block head%}
+<div class="text-center">
+    <img src="{{ url_for('static', filename='geo.jpg' ) }}"  width="50%" alt="not found" >
+</div>
+
+
+<div class="container-fluid col-lg-10">
+
+    <div style="text-align: center; font-size: 18pt;"> Мы оказываем следующие услуги </div>
+
+    <div style="text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff; font-weight:600;">
+        {% for item in geo_site %}
+        <p>
+            <li> {{ item.content }} </li>
+        </p>
+        {% endfor %}
+
+    </div>
+    <div style="text-align: center; font-size: 16pt;text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff"> Вы планируете построить дом, магазин, кафе и др., возвести забор
+        на его законном месте, провести любые инженерные коммуникации, начать проектировать любые объекты капитального
+        строительства, тогда Вам понадобятся данные услуги" </div>
+    <a href="{{ url_for('order') }}" target="_blank" class="btn btn-primary">
+        Заказать услугу
+    </a>
+
+</div>
+</div>
+
+
+</html>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>ППК Роскадастр Усть-Лабинск</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <Style>
+.font_set {
+    font-size: 16pt;
+    padding-bottom: 5%;
+ }
+
+
+    </Style>
+<body>
+{% extends 'index.html' %}
+{% block head%}
+<div class="container">
+    <div class="col-xl-10 col-lg-8 col-md-7 col-sm-6 mx-auto">
+        <div class="row">
+            <div class="text-center">
+                <div class="font_set">
+                    <p>Наш Адрес: РФ, Краснодарский край, г. Усть-Лабинск, ул. Ободовского, д.32 Б</p>
+                    <p>Время работы : ежедн. 8:00 — 17:00 субота воскресенье выходной </p>
+                    <p>Телефон: +7 (86135) 5-01-29</p>
+                </div>
+            </div>
+            <script type="text/javascript" charset="utf-8" async
+                    src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aa4e4fc1b2cc305771141abe36386efda974ca0058b027b600b3d7ecb2afdb9fe&amp;width=709&amp;height=485&amp;lang=ru_RU&amp;scroll=true"></script>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+{% endblock %}
+
+

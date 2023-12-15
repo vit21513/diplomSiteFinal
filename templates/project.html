@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проектные работы</title>
+    <!-- Подключаем актуальную версию Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main_text {
+            font-size: 16pt;
+            font-weight: bold;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    {% extends 'index.html' %}
+    {% block head%}
+    <div class="text-center">
+        <img src="{{ url_for('static', filename='project.jpg' ) }}" width="50%" alt="not found" class="img-fluid rounded-5">
+    </div>
+    <div style="text-align: center; font-size: 18pt;"> Мы оказываем следующие услуги проектированию</div>
+    <div class="container-fluid col-lg-10">
+        <div class="main-text">
+            <div style="text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff; font-weight:600;">
+                {% for item in project_site %}
+                <p>
+                    <li> {{ item.content }} </li>
+                </p>
+                {% endfor %}
+            </div>
+            <a href="{{ url_for('order') }}" target="_blank" class="btn btn-primary">
+                Заказать услугу
+            </a>
+        </div>
+    </div>
+    </body>
+</html>
+
+{% endblock %}

@@ -9,3 +9,6 @@ ___струтура проекта:___<br>
 - content_site.py содержит информацию для первоначального наполнения базы данных
 - model.py содержит модели базы данных
 - requirements.txt содержит список необходимых зависимостей 
+
+
+<h4>link https://ustlabroscadastr.pythonanywhere.com/</h4>

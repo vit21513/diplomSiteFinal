@@ -109,8 +109,8 @@ def delete_log():
     try:
         os.remove(FILENAMELOG)
 
-    except Exception as e:
-        return e
+    except Exception:
+        return f"file not found"
     return "file is deleted"
 
 

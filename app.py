@@ -221,37 +221,38 @@ def send_email_in_thread(text):
 def order():
     options = ['Земельный участок', 'Жилой дом, Квартира', 'Иное', 'Задать вопрос']
     form = OrderForm()
-    if form.validate_on_submit():
-        captcha = form.captcha.data
-        if captcha == request.cookies.get('captcha'):
-            # Получаем данные из формы
-            selected_option = form.selected_option.data
-            last_name = form.last_name.data
-            email = form.email.data
-            phone = form.phone.data
-            message = form.message.data
-            order = Order(last_name=last_name, email=email, phone=phone, message=message)
-            db.session.add(order)
-            db.session.commit()
-            # Создаем словарь с данными, включая выбранный элемент списка
-            data = {
-                'Выбранный элемент': selected_option,
-                'Имя Фамилия': last_name,
-                'Email адрес': email,
-                'Номер телефона': phone,
-                'Сообщение': message,
-                'Дата создания': str(datetime.now())
-            }
-            flash('Ваше обращение отправлено', "success")
-            save_to_json(data)
-            # Отправка письма в отдельном потоке
-            thread = Thread(target=send_email_in_thread, args=(str(data)[1:-1],))
-            thread.start()
-            response = make_response(redirect(url_for('order')))
-            response.set_cookie('captcha', '', expires=0)  # Удаляем куку с капчей
-            return response
-        else:
-            flash('Неправильный проверочный код', "warning")
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            captcha = form.captcha.data
+            if captcha == request.cookies.get('captcha'):
+                # Получаем данные из формы
+                selected_option = form.selected_option.data
+                last_name = form.last_name.data
+                email = form.email.data
+                phone = form.phone.data
+                message = form.message.data
+                order = Order(last_name=last_name, email=email, phone=phone, message=message)
+                db.session.add(order)
+                db.session.commit()
+                # Создаем словарь с данными, включая выбранный элемент списка
+                data = {
+                    'Выбранный элемент': selected_option,
+                    'Имя Фамилия': last_name,
+                    'Email адрес': email,
+                    'Номер телефона': phone,
+                    'Сообщение': message,
+                    'Дата создания': str(datetime.now())
+                }
+                flash('Ваше обращение отправлено', "success")
+                save_to_json(data)
+                # Отправка письма в отдельном потоке
+                thread = Thread(target=send_email_in_thread, args=(str(data)[1:-1],))
+                thread.start()
+                response = make_response(redirect(url_for('order')))
+                response.set_cookie('captcha', '', expires=0)  # Удаляем куку с капчей
+                return response
+            else:
+                flash('Неправильный проверочный код', "warning")
     # Генерируем капчу и сохраняем в куки
     captcha = generate_captcha()
     response = make_response(render_template('orders.html', form=form, options=options, captcha=captcha))
